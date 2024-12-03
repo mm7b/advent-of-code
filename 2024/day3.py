@@ -21,14 +21,10 @@ def part2(instructions):
     i = 0
     while i < len(instructions):
         if instructions[i : i + 4] == "mul(" and do:
-            j = i + 4
-            left, j = extract_digit(instructions, j)
-            i = j
+            left, i = extract_digit(instructions, i + 4)
             if not left or instructions[i] != ",":
                 continue
-            j = i + 1
-            right, j = extract_digit(instructions, j)
-            i = j
+            right, i = extract_digit(instructions, i + 1)
             if not right or instructions[i] != ")":
                 continue
             total += left * right
