@@ -20,14 +20,16 @@ def get_start_coord(matrix):
 
 
 def get_path(matrix, start, dx, dy):
-    visited = set()
+    visited = {}
     loop = False
     x, y = start
+    i = 0
     while True:
-        visited.add((x, y, dx, dy))
+        visited[(x, y, dx, dy)] = i  # Step index to later sort the cells visited
+        i += 1
         if not in_bounds(matrix, x + dx, y + dy):
             break
-        elif matrix[x + dx][y + dy] == "#":
+        if matrix[x + dx][y + dy] == "#":
             dx, dy = update_direction(dx, dy)
         else:
             x += dx
@@ -38,33 +40,19 @@ def get_path(matrix, start, dx, dy):
     return visited, loop
 
 
-def part2_unoptimized(matrix, start, path):
-    obstructions = set()
-    for x, y, _, _ in path:
-        if (x, y) == start:
-            continue
-        matrix[x][y] = "#"
-        # Unoptimzed = check if the whole path from the beginning is a loop
-        _, loop = get_path(matrix, start, -1, 0)
-        if loop:
-            obstructions.add((x, y))
-        matrix[x][y] = "."
-    return obstructions
-
-
 def part2(matrix, start, path):
-    obstructions = set()
-    for x, y, dx, dy in path:
+    obstructions = {}
+    # Sorting the visited cell to only check the first time the path reaches the current cell
+    for x, y, dx, dy in sorted(path, key=lambda x: path[x]):
         if (x, y) == start or (x, y) in obstructions:
             continue
         matrix[x][y] = "#"
         # Only check if the path starting at the previous step is a loop
         new_start = (x - dx, y - dy)
         _, loop = get_path(matrix, new_start, dx, dy)
-        if loop:
-            obstructions.add((x, y))
+        obstructions[(x, y)] = loop
         matrix[x][y] = "."
-    return obstructions
+    return [coord for coord, loop in obstructions.items() if loop]
 
 
 def main():
@@ -81,9 +69,6 @@ def main():
     # PART 2
     p2 = part2(matrix, start, path)
     print(len(p2))
-
-    p2_uo = part2_unoptimized(matrix, start, path)
-    print(len(p2_uo))
 
 
 if __name__ == "__main__":
