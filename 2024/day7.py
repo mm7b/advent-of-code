@@ -1,6 +1,10 @@
 from operator import add, mul
 
 
+def concat(x, y):
+    return int(str(x) + str(y))
+
+
 def solvable(res, operands, operators=[add, mul]):
     for op in operators:
         val = op(operands[0], operands[1])
@@ -27,9 +31,7 @@ def main():
             [
                 res
                 for res, operands in equations
-                if solvable(
-                    res, operands, [add, mul, lambda x, y: int(str(x) + str(y))]
-                )
+                if solvable(res, operands, [add, mul, concat])
             ]
         )
     )
