@@ -8,6 +8,8 @@ def concat(x, y):
 def solvable(res, operands, operators=[add, mul]):
     for op in operators:
         val = op(operands[0], operands[1])
+        if val > res:
+            continue
         if len(operands) > 2:
             if res_op := solvable(res, [val] + operands[2:], operators):
                 return res_op
