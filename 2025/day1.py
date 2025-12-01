@@ -23,8 +23,8 @@ def main():
         next_nr = op(nr, val) % 100
         if (
             (op == add and next_nr < nr)
-            or next_nr == 0
-            or (nr != 0 and op == sub and next_nr > nr)
+            or nr != 0
+            and (next_nr == 0 or (op == sub and next_nr > nr))
         ):
             tot += 1
         nr = next_nr
