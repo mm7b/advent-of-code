@@ -6,3 +6,4 @@ Yearly quick-link:
 * [2022](https://adventofcode.com/2022)
 * [2023](https://adventofcode.com/2023)
 * [2024](https://adventofcode.com/2024)
+* [2025](https://adventofcode.com/2025)
