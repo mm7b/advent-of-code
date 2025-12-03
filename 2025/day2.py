@@ -18,8 +18,10 @@ def part2(ranges):
         for pw in current:
             pw = str(pw)
             for i in range(1, (len(pw) // 2) + 1):
-                slices = [pw[j : j + i] for j in range(0, len(pw), i)]
-                if all(s == slices[0] for s in slices):
+                if len(pw) % i != 0:
+                    continue
+                slices = {pw[j : j + i] for j in range(0, len(pw), i)}
+                if len(slices) == 1:
                     valid_pw.append(int(pw))
                     break
     return sum(valid_pw)
