@@ -18,14 +18,14 @@ def find_batteries(banks, size):
 def find_batteries_bis(banks, size):
     packs = []
     for bank in banks:
-        pack = []
+        pack = ""
         for i in range(size):
             max_i, max_val = max(
                 enumerate(bank[: len(bank) - (size - i - 1)]), key=itemgetter(1)
             )
-            pack.append(max_val)
+            pack += str(max_val)
             bank = bank[max_i + 1 :]
-        packs.append(int("".join(str(b) for b in pack)))
+        packs.append(int(pack))
     return sum(packs)
 
 
