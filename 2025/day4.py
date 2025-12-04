@@ -1,14 +1,14 @@
-def get_adjacent_cells(matrix, r, c):
+def adjacent_count(matrix, r, c):
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-    cells = []
-    for dr, dc in directions:
-        if (
-            0 <= r + dr < len(matrix)
+    return len(
+        [
+            (r + dr, c + dc)
+            for dr, dc in directions
+            if 0 <= r + dr < len(matrix)
             and 0 <= c + dc < len(matrix[0])
             and matrix[r + dr][c + dc]
-        ):
-            cells.append((r + dr, c + dc))
-    return cells
+        ]
+    )
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
     accessible = []
     for r, row in enumerate(matrix):
         for c, elem in enumerate(row):
-            if elem and len(get_adjacent_cells(matrix, r, c)) < 4:
+            if elem and adjacent_count(matrix, r, c) < 4:
                 accessible.append((r, c))
     print(len(accessible))
 
@@ -60,7 +60,7 @@ def main():
         accessible = []
         for r, row in enumerate(matrix):
             for c, elem in enumerate(row):
-                if elem and len(get_adjacent_cells(matrix, r, c)) < 4:
+                if elem and adjacent_count(matrix, r, c) < 4:
                     accessible.append((r, c))
         if not accessible:
             break
