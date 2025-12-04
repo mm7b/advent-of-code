@@ -1,12 +1,12 @@
-def in_bounds(matrix, r, c):
-    return 0 <= r < len(matrix) and 0 <= c < len(matrix[0])
-
-
 def get_adjacent_cells(matrix, r, c):
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     cells = []
     for dr, dc in directions:
-        if in_bounds(matrix, r + dr, c + dc) and matrix[r + dr][c + dc]:
+        if (
+            0 <= r + dr < len(matrix)
+            and 0 <= c <= len(matrix[0])
+            and matrix[r + dr][c + dc]
+        ):
             cells.append((r + dr, c + dc))
     return cells
 
