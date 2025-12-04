@@ -4,7 +4,7 @@ def get_adjacent_cells(matrix, r, c):
     for dr, dc in directions:
         if (
             0 <= r + dr < len(matrix)
-            and 0 <= c <= len(matrix[0])
+            and 0 <= c + dc < len(matrix[0])
             and matrix[r + dr][c + dc]
         ):
             cells.append((r + dr, c + dc))
