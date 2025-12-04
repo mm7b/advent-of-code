@@ -1,9 +1,3 @@
-def pp(matrix):
-    for row in matrix:
-        print("".join(["@" if cell == 1 else "." for cell in row]))
-    print()
-
-
 def in_bounds(matrix, r, c):
     return 0 <= r < len(matrix) and 0 <= c < len(matrix[0])
 
@@ -25,9 +19,7 @@ def main():
     accessible = []
     for r, row in enumerate(matrix):
         for c, elem in enumerate(row):
-            if not elem:
-                continue
-            if len(get_adjacent_cells(matrix, r, c)) < 4:
+            if elem and len(get_adjacent_cells(matrix, r, c)) < 4:
                 accessible.append((r, c))
     print(len(accessible))
 
