@@ -9,10 +9,9 @@ def main():
     print(len([i for i in ids if any(s <= i <= e for s, e in ranges)]))
 
     # PART 2
-    total = 0
+    total, seen = 0, set()
     # Sort by descending range size to avoid fully englobing ranges
     ranges = sorted(ranges, key=lambda r: r[1] - r[0], reverse=True)
-    seen = set()
     for s, e in ranges:
         for other_s, other_e in seen:
             if s >= other_s and e <= other_e:
