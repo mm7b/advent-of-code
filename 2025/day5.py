@@ -20,7 +20,7 @@ def main():
                 break
             if other_s <= s <= other_e:
                 s = other_e + 1
-            if other_s <= e <= other_e:
+            elif other_s <= e <= other_e:
                 e = other_s - 1
         seen.add((s, e))
         total += e - s + 1
