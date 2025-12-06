@@ -5,22 +5,23 @@ from operator import add, mul
 def main():
     # PART 1
     with open("inputs/day6.txt", "r", encoding="utf8") as f:
-        problems = [
-            [
-                add if arg == "+" else mul if arg == "*" else int(arg)
-                for arg in l.strip().split(" ")
-                if arg
-            ]
-            for l in f.readlines()
-        ]
-    print(
-        sum(
-            [
-                reduce(problems[-1][i], [arg[i] for arg in problems[:-1]])
-                for i in range(len(problems[0]))
-            ]
+        print(
+            sum(
+                [
+                    reduce(p[-1], p[:-1])
+                    for p in zip(
+                        *[
+                            [
+                                add if arg == "+" else mul if arg == "*" else int(arg)
+                                for arg in l.strip().split(" ")
+                                if arg
+                            ]
+                            for l in f.readlines()
+                        ]
+                    )
+                ]
+            )
         )
-    )
 
     # PART 2
     with open("inputs/day6.txt", "r", encoding="utf8") as f:
