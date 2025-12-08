@@ -7,11 +7,11 @@ def find_splits(matrix, beams, splits=0, unique=True):
         if r == len(matrix) - 1:
             continue
         if matrix[r + 1][c]:
-            splits += 1 if unique else 1 * nr
-            new_beams[(r + 1, c - 1)] += 1 if unique else nr
-            new_beams[(r + 1, c + 1)] += 1 if unique else nr
+            splits += 1 if unique else nr
+            new_beams[(r + 1, c - 1)] += nr
+            new_beams[(r + 1, c + 1)] += nr
         else:
-            new_beams[(r + 1, c)] += 1 if unique else nr
+            new_beams[(r + 1, c)] += nr
     return find_splits(matrix, new_beams, splits, unique) if new_beams else splits
 
 
